@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,17 +121,15 @@
     </div>
 
     <script>
-       let watchedAds = parseInt(localStorage.getItem('watchedAds') || 0);
-let earnedPoints = parseFloat(localStorage.getItem('earnedPoints') || 0.00);
-const dailyLimit = 120;
-const requiredClickAfter = 5;
-let lastAdClicked = localStorage.getItem('lastAdClicked') === 'true';
+        let watchedAds = parseInt(localStorage.getItem('watchedAds') || 0);
+        let earnedPoints = parseFloat(localStorage.getItem('earnedPoints') || 0.00);
+        
+        document.getElementById('watched-ads').textContent = watchedAds;
+        document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+        updateProgressBar();
 
-document.getElementById('watched-ads').textContent = watchedAds;
-document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-updateProgressBar();
-
-document.getElementById('watch-ad-btn').addEventListener('click', watchAd); function () {
+        document.getElementById('watch-ad-btn').addEventListener('click', watchAd);
+        document.getElementById('direct-link-btn').addEventListener('click', function () {
                 window.location.href = "https://t.me/+UWFi1U4G1jdlOTM1"; // Your group link here
             });
         document.getElementById('payment-proof-btn').addEventListener('click', function () {
@@ -152,47 +151,29 @@ document.getElementById('watch-ad-btn').addEventListener('click', watchAd); func
         document.getElementById('submit-withdraw').addEventListener('click', withdrawPoints);
 
         function watchAd() {
-    if (watchedAds >= dailyLimit) {
-        alert("আপনার আজকের লিমিট শেষ। পরবর্তীদিন আবার চেষ্টা করুন।");
-        return;
-    }
+            if (watchedAds >= 120) {
+                alert('You have reached your daily ad view limit of 120 ads.');
+                return;
+            }
+            if (typeof show_8923405 === 'function') {
+                show_8923405().then(() => {
+                    watchedAds++;
+                    earnedPoints += 0.1;
+                    localStorage.setItem('watchedAds', watchedAds);
+                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+                    document.getElementById('watched-ads').textContent = watchedAds;
+                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+                    updateProgressBar();
 
-    if (watchedAds > 0 && watchedAds % requiredClickAfter === 0 && !lastAdClicked) {
-        alert("আপনাকে শেষ অ্যাড ক্লিক করতে হবে!");
-        return;
-    }
-
-    if (typeof show_8923405 === 'function') {
-        show_8923405().then(() => {
-            watchedAds++;
-            earnedPoints += 0.10;
-            lastAdClicked = false;
-
-            localStorage.setItem('watchedAds', watchedAds);
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
-            localStorage.setItem('lastAdClicked', lastAdClicked.toString());
-
-            document.getElementById('watched-ads').textContent = watchedAds;
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-            updateProgressBar();
-        }).catch(err => console.error("Ad failed to load", err));
-    } else {
-        console.warn("Ad function is not available.");
-    }
-}
-
-// শেষ অ্যাড ক্লিকের জন্য নতুন ফাংশন
-document.getElementById('direct-link-btn').addEventListener('click', function () {
-    lastAdClicked = true;
-    localStorage.setItem('lastAdClicked', 'true');
-    alert("শেষ অ্যাড ক্লিক করা হয়েছে, আপনি এখন নতুন অ্যাড দেখতে পারবেন।");
-});
-
-function updateProgressBar() {
-    const progress = (watchedAds % dailyLimit) * (100 / dailyLimit);
-    document.getElementById('progress-circle').style.background = conic-gradient(#4caf50 ${progress}%, #444 ${progress}%);
-    document.getElementById('progress-circle').textContent = ${progress.toFixed(0)}%;
-}
+                    // Reward after 5 ads
+                    if (watchedAds % 5 === 0) {
+                        alert('Congratulations! You have earned a reward after watching 5 ads.');
+                    }
+                }).catch(err => console.error("Ad failed to load", err));
+            } else {
+                console.warn("Ad function is not available.");
+            }
+        }
 
         function updateProgressBar() {
             const progress = (watchedAds % 20) * 5;
@@ -209,7 +190,7 @@ function updateProgressBar() {
             const method = document.getElementById('payment-method').value;
             const phone = document.getElementById('phone-number').value;
 
-            if (amount < 0.20 || amount > earnedPoints) {
+            if (amount < 20 || amount > earnedPoints) {
                 alert('Invalid withdrawal amount.');
                 return;
             }
@@ -237,3 +218,4 @@ Phone: ${phone}`;
     <script src='//whephiwums.com/vignette.min.js' data-zone='8923405' data-sdk='show_8923405'></script>
 </body>
 </html>
+
