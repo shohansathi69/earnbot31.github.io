@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Watching Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .scrolling-banner {
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            animation: scroll-banner 10s linear infinite;
+        }
+
+        @keyframes scroll-banner {
+            0% { left: 100%; }
+            100% { left: -100%; }
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#4caf50 0%, #444 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: auto;
+            transition: background 0.5s ease-in-out;
+        }
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #388e3c;
+        }
+        .hidden {
+            display: none;
+        }
+        .withdraw-section {
+            background: #252525;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="scrolling-banner">
+        <marquee>Welcome to Free Income 2025! Watch ads and earn money! Minimum withdraw is ৳20. Join our community!</marquee>
+    </div>
+
+    <div class="container">
+        <h1>Ad Watching App</h1>
+        <h2>সর্বনিম্ন উইন্ডো এমাউন্ট ৳20</h2>
+        <div class="progress-circle" id="progress-circle">0%</div>
+        <p>Watched Ads: <span id="watched-ads">0</span></p>
+        <p>Earned Points: ৳<span id="earned-points">0.01</span></p>
+        
+        <button id="watch-ad-btn">Watch Ad</button>
+        <button id="direct-link-btn">Direct Link</button>
+        <button id="payment-proof-btn">Payment Proof</button>
+        <button id="join-btn">Join Community</button>
+        <button id="withdraw-btn">Withdraw</button>
+        <button id="referral-link-btn">Referral Link</button>
+        <button id="user-list-btn">Referral Users List</button>
+        <button id="withdraw-history-btn">Withdraw History</button>
+
+        <div id="withdraw-section" class="withdraw-section hidden">
+            <h3>Withdraw Funds</h3>
+            <input type="number" id="withdraw-amount" placeholder="Enter Amount" ">
+            <select id="payment-method">
+                <option value="Manual">Manual</option>
+                <option value="Bkash">Bkash</option>
+                <option value="Nagad">Nagad</option>
+            </select>
+            <input type="text" id="phone-number" placeholder="Enter Your Number">
+            <input type="text" id="telegram-username" placeholder="Your Telegram Username">
+            <button id="submit-withdraw">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        let watchedAds = parseInt(localStorage.getItem('watchedAds') || 0);
+        let earnedPoints = parseFloat(localStorage.getItem('earnedPoints') || 0.00);
+        
+        document.getElementById('watched-ads').textContent = watchedAds;
+        document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+        updateProgressBar();
+
+        document.getElementById('watch-ad-btn').addEventListener('click', watchAd);
+        document.getElementById('direct-link-btn').addEventListener('click', function () {
+                window.location.href = "https://t.me/+UWFi1U4G1jdlOTM1"; // Your group link here
+            });
+        document.getElementById('payment-proof-btn').addEventListener('click', function () {
+                window.location.href = "https://t.me/+UWFi1U4G1jdlOTM1"; // Payment proof link
+            });
+        document.getElementById('join-btn').addEventListener('click', function () {
+                window.location.href = "https://t.me/+UWFi1U4G1jdlOTM1"; // Your community link
+            });
+        document.getElementById('referral-link-btn').addEventListener('click', function () {
+                alert("Your Referral Link: https://t.me/+UWFi1U4G1jdlOTM1"); // Your referral link
+            });
+        document.getElementById('user-list-btn').addEventListener('click', function () {
+                alert("Referral Users List: (To be shown in your admin panel)"); // Your user list
+            });
+        document.getElementById('withdraw-history-btn').addEventListener('click', function () {
+                alert("Your Withdraw History: (To be shown in your admin panel)"); // Your withdraw history
+            });
+        document.getElementById('withdraw-btn').addEventListener('click', toggleWithdraw);
+        document.getElementById('submit-withdraw').addEventListener('click', withdrawPoints);
+
+        function watchAd() {
+            if (typeof show_2798718 === 'function') {
+                show_2798718().then(() => {
+                    watchedAds++;
+                    earnedPoints += 0.1;
+                    localStorage.setItem('watchedAds', watchedAds);
+                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+                    document.getElementById('watched-ads').textContent = watchedAds;
+                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+                    updateProgressBar();
+                }).catch(err => console.error("Ad failed to load", err));
+            } else {
+                console.warn("Ad function is not available.");
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = (watchedAds % 20) * 5;
+            document.getElementById('progress-circle').style.background = `conic-gradient(#4caf50 ${progress}%, #444 ${progress}%)`;
+            document.getElementById('progress-circle').textContent = `${progress}%`;
+        }
+
+        function toggleWithdraw() {
+            document.getElementById('withdraw-section').classList.toggle('hidden');
+        }
+
+        function withdrawPoints() {
+            const amount = parseFloat(document.getElementById('withdraw-amount').value);
+            const method = document.getElementById('payment-method').value;
+            const phone = document.getElementById('phone-number').value;
+
+            if (amount < 20 || amount > earnedPoints) {
+                alert('Invalid withdrawal amount.');
+                return;
+            }
+
+            earnedPoints -= amount;
+            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+
+            const message = `Withdrawal Request:
+Amount: ${amount} BDT
+Method: ${method}
+Phone: ${phone}`;
+            sendTelegramMessage(message);
+        }
+
+        function sendTelegramMessage(msg) {
+            const botToken = "7917079813:AAFHSsIJnxcqCOVHPohUSboBl3jWX5n5ni8";
+            const chatId = "1980653192";
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`)
+                .then(response => response.json())
+                .then(data => console.log('Message sent to admin'))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+    <script src='//whephiwums.com/vignette.min.js' data-zone='2798718' data-sdk='show_2798718'></script>
+</body>
+</html>
