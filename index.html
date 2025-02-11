@@ -148,7 +148,7 @@
         document.getElementById('submit-withdraw').addEventListener('click', withdrawPoints);
 
         function watchAd() {
-            if (watchedAds >= 500) {
+            if (watchedAds >= 5) {
                 alert('You have reached your daily ad view limit of 500 ads.');
                 return;
             }
@@ -173,7 +173,7 @@
         }
 
         function updateProgressBar() {
-            const progress = (watchedAds % 20) * 5;
+            const progress = (watchedAds % 5) * 20;
             document.getElementById('progress-circle').style.background = `conic-gradient(#4caf50 ${progress}%, #444 ${progress}%)`;
             document.getElementById('progress-circle').textContent = `${progress}%`;
         }
