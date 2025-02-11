@@ -173,7 +173,7 @@
         }
 
         function updateProgressBar() {
-            const progress = (watchedAds % 20) * 20;
+            const progress = (watchedAds % 20) * 5;
             document.getElementById('progress-circle').style.background = `conic-gradient(#4caf50 ${progress}%, #444 ${progress}%)`;
             document.getElementById('progress-circle').textContent = `${progress}%`;
         }
