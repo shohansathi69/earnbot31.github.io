@@ -180,7 +180,7 @@
             const method = document.getElementById('payment-method').value;
             const phone = document.getElementById('phone-number').value;
 
-            if (amount < 20 || amount > earnedPoints) {
+            if (amount < 0.20 || amount > earnedPoints) {
                 alert('Invalid withdrawal amount.');
                 return;
             }
