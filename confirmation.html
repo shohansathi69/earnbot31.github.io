@@ -42,7 +42,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>Exchange Confirmation</h2>
+    <h2>এক নজরে দেখে নিন</h2>
     <div class="details">
       আপনি পাবেন <span id="sendAmount">--</span><br/>
       আপনাকে পাঠাতে হবে <span id="receiveAmount">--</span> BDT
@@ -135,7 +135,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>Exchange Request Form</h2>
+    <h2>Submit yor details</h2>
     <form action="https://formsubmit.co/idfacebook715@gmail.com" method="POST">
       <!-- Optional security settings -->
       <input type="hidden" name="_captcha" value="false">
@@ -148,14 +148,17 @@
       <label>Mobile Number (bKash/Nagad)</label>
       <input type="text" name="Mobile Number" required>
 
-      <label>Amount Sent (USD)</label>
+      <label>Amount Sent (BDT)</label>
       <input type="text" name="Sent USD Amount" required>
 
-      <label>Transaction ID (Payeer)</label>
+      <label>Transaction ID</label>
       <input type="text" name="Transaction ID" required>
 
       <label>Additional Message (Optional)</label>
       <textarea name="Message" rows="3"></textarea>
+
+      <label>Your Email</label>
+      <input type="text" name="Email" required>
 
       <button type="submit">Submit Exchange</button>
     </form>
