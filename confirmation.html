@@ -1,6 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exchange Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f9f0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #004d00;
+    }
+    .details {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+    .highlight {
+      color: #d00;
+      font-weight: bold;
+    }
+    .copy-btn {
+      background: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exchange Confirmation</h2>
+    <div class="details">
+      You are sending <span id="sendAmount">--</span><br/>
+      You will receive <span id="receiveAmount">--</span> BDT
+    </div>
+
+    <p>Send the equivalent amount to this number:</p>
+    <p class="highlight">bKash: 01XXXXXXXXX</p>
+
+    <p>After payment, send your transaction ID using live chat or email.</p>
+
+    <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
+  </div>
+
+  <script>
+    // Get URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const send = params.get('send');
+    const receive = params.get('receive');
+
+    // Display values
+    document.getElementById('sendAmount').innerText = `${send} Token`;
+    document.getElementById('receiveAmount').innerText = receive;
+
+    function copyNumber() {
+      const tempInput = document.createElement("input");
+      tempInput.value = "01865873683"; // your number here
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      alert("Number copied to clipboard!");
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exchange Confirmation</title>
