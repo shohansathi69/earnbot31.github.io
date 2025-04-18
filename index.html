@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CPA BAZAR</title>
+  <title>Exchange Bari Clone</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -87,31 +87,34 @@
 </head>
 <body>
   <div class="topbar">
-    <span>নতুন ইউজারদের জন্য অফার চলছে! কোন রকম সমস্যা হলে লাইভ চ্যাটে যোগাযোগ করুন! দ্রুত এক্সচেঞ্জ করুন।</span>
+    <span>নতুন ইউজারদের জন্য অফার চলছে! এক্সচেঞ্জ রেট অনুযায়ী দ্রুত এক্সচেঞ্জ করুন।</span>
   </div>
 
   <header>
-    <h1>CPA BAZAR</h1>
-    <p>| Operator: Online</p>
+    <h1>Exchange Bari</h1>
+    <p>Login / Create Account | English | Operator: Online</p>
   </header>
 
   <div class="exchange-box">
-    <h3>আপনি কয়টি নেবেন তা লিখুন👇</h3>
-    <select id="sendCurrency">
-      <option value="bkash">bkash BDT</option>
-      <option value="bkash">Nagod BDT</option>
+    <h3>You Send</h3>
+    <select id="sendCurrency" onchange="calculateReceive()">
+      <option value="USDT" data-rate="100">USDT</option>
+      <option value="BNB" data-rate="50">BNB</option>
+      <option value="TRX" data-rate="70">TRX</option>
+      <option value="DZD" data-rate="15">DZD</option>
+      <option value="YOP" data-rate="188">YOP</option>
+      <option value="SHIB" data-rate="90">SHIB</option>
     </select>
     <input type="number" id="sendAmount" value="1" onchange="calculateReceive()" />
-    <div class="result">Exchange rate: 1 USD = 7 BDT</div>
+    <div class="result">Exchange rate: 1 USDT = 100 BDT</div>
 
-    <h3>আপনি কি নিবেন তা সিলেক্ট করুন🙂</h3>
+    <h3>You Receive</h3>
     <select id="receiveCurrency">
-      <option value="bKash">Fake signup User Agent</option>
-      <option value="bKash">Email</option>
+      <option value="bKash">B-Personal BDT</option>
     </select>
     <input type="text" id="receiveAmount" readonly />
 
-    <div style="color: #d00;">Reserve: 999+ BDT</div>
+    <div style="color: #d00;">Reserve: 3202.5 BDT</div>
     <button onclick="nextPage()">Exchange</button>
   </div>
 
@@ -121,9 +124,12 @@
 
   <script>
     function calculateReceive() {
-      const rate = 7;
+      const currency = document.getElementById('sendCurrency');
+      const rate = parseFloat(currency.options[currency.selectedIndex].getAttribute('data-rate'));
       const sendAmount = parseFloat(document.getElementById('sendAmount').value);
-      document.getElementById('receiveAmount').value = (sendAmount * rate).toFixed(2);
+      const receiveAmount = sendAmount * rate;
+      document.getElementById('receiveAmount').value = receiveAmount.toFixed(2);
+      document.querySelector('.result').innerText = `Exchange rate: 1 ${currency.value} = ${rate} BDT`;
     }
     calculateReceive();
 
