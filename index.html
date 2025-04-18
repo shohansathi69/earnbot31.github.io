@@ -87,7 +87,7 @@
 </head>
 <body>
   <div class="topbar">
-    <span>নতুন ইউজারদের জন্য অফার চলছে! এক্সচেঞ্জ রেট অনুযায়ী দ্রুত এক্সচেঞ্জ করুন।</span>
+    <span>নতুন ইউজারদের জন্য অফার চলছে! কোন রকম সমস্যা হলে লাইভ চ্যাটে যোগাযোগ করুন! দ্রুত এক্সচেঞ্জ করুন।</span>
   </div>
 
   <header>
@@ -96,21 +96,22 @@
   </header>
 
   <div class="exchange-box">
-    <h3>You Send</h3>
+    <h3>আপনি কয়টি নেবেন তা লিখুন👇</h3>
     <select id="sendCurrency" onchange="calculateReceive()">
-      <option value="USDT" data-rate="100">USDT</option>
-      <option value="BNB" data-rate="50">BNB</option>
-      <option value="TRX" data-rate="70">TRX</option>
-      <option value="DZD" data-rate="15">DZD</option>
-      <option value="YOP" data-rate="188">YOP</option>
-      <option value="SHIB" data-rate="90">SHIB</option>
+      <option value="User Agent" data-rate="7">User Agen</option>
+      <option value="Email" data-rate="6">Email</option>
+      <option value="CPM User agent" data-rate="7">CPM User agent</option>
+      <option value="Fake signup user agent" data-rate="7">Fake signup user agent</option>
+      <option value="SMS verified Mail" data-rate="35">SMS verified Mail</option>
+      <option value="CPA account" data-rate="2000">CPA account</option>
     </select>
     <input type="number" id="sendAmount" value="1" onchange="calculateReceive()" />
     <div class="result">Exchange rate: 1 USDT = 100 BDT</div>
 
-    <h3>You Receive</h3>
+    <h3>আপনি কি নিবেন তা সিলেক্ট করুন🙂</h3>
     <select id="receiveCurrency">
       <option value="bKash">B-Personal BDT</option>
+      <option value="Nagod">Nagod BDT</option>
     </select>
     <input type="text" id="receiveAmount" readonly />
 
