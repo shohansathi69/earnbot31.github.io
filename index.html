@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exchange Bari Clone</title>
+  <title>CPA BAZAR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -68,21 +68,6 @@
       text-align: center;
       margin-bottom: 15px;
     }
-    .live-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #f50057;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -91,19 +76,19 @@
   </div>
 
   <header>
-    <h1>Exchange Bari</h1>
-    <p>Login / Create Account | English | Operator: Online</p>
+    <h1>CPA BAZAR</h1>
+    <p> | English | admin🟢: Online</p>
   </header>
 
   <div class="exchange-box">
     <h3>আপনি কয়টি নেবেন তা লিখুন👇</h3>
     <select id="sendCurrency" onchange="calculateReceive()">
-      <option value="User Agent" data-rate="7">User Agen</option>
+      <option value="User Agent" data-rate="7">User Agent</option>
       <option value="Email" data-rate="6">Email</option>
-      <option value="CPM User agent" data-rate="7">CPM User agent</option>
-      <option value="Fake signup user agent" data-rate="7">Fake signup user agent</option>
-      <option value="SMS verified Mail" data-rate="35">SMS verified Mail</option>
-      <option value="CPA account" data-rate="2000">CPA account</option>
+      <option value="CPM User agent" data-rate="7">CPM User Agent</option>
+      <option value="Fake signup user agent" data-rate="7">Fake Signup User Agent</option>
+      <option value="SMS verified Mail" data-rate="35">SMS Verified Mail</option>
+      <option value="CPA account" data-rate="2000">CPA Account</option>
     </select>
     <input type="number" id="sendAmount" value="1" onchange="calculateReceive()" />
     <div class="result">Exchange rate: 1 USDT = 100 BDT</div>
@@ -117,10 +102,6 @@
 
     <div style="color: #d00;">Reserve: 3202.5 BDT</div>
     <button onclick="nextPage()">Exchange</button>
-  </div>
-
-  <div class="live-chat" onclick="alert('Live Chat Coming Soon!')">
-    &#128172;
   </div>
 
   <script>
@@ -140,5 +121,20 @@
       window.location.href = `confirmation.html?send=${sendAmount}&receive=${receiveAmount}`;
     }
   </script>
+
+  <!-- Start of Tawk.to Script -->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function(){
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/67a0cea73a84273260792226/1ij62egig';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!-- End of Tawk.to Script -->
+
 </body>
 </html>
