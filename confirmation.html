@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exchange Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2fff5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #006400;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exchange Request Form</h2>
+    <form action="https://formsubmit.co/el/gihano" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://yourdomain.com/thankyou.html">
+
+      <label>Your Full Name</label>
+      <input type="text" name="Full Name" required>
+
+      <label>Mobile Number (bKash/Nagad)</label>
+      <input type="text" name="Mobile Number" required>
+
+      <label>Amount Sent (USD)</label>
+      <input type="text" name="Sent USD Amount" required>
+
+      <label>Transaction ID (Payeer)</label>
+      <input type="text" name="Transaction ID" required>
+
+      <label>Additional Message (Optional)</label>
+      <textarea name="Message" rows="3"></textarea>
+
+      <button type="submit">Submit Exchange</button>
+    </form>
+  </div>
+</body>
+</html>
