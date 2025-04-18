@@ -1,85 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>18+ Offer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exchange Bari Clone</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      background: #e9f7ef;
+    }
+    .topbar {
+      background: #004d00;
       color: white;
-      background: url('https://imagex1.sx.cdn.live/images/pinporn/2019/06/01/21247122.gif') no-repeat center center fixed;
-      background-size: cover;
+      padding: 8px 15px;
+      font-size: 14px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .topbar span {
+      display: inline-block;
+      animation: scrollText 20s linear infinite;
+    }
+    @keyframes scrollText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    header {
+      background-color: #ffffff;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      color: #004d00;
+    }
+    .exchange-box {
+      max-width: 500px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .result {
+      background-color: #dff0d8;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .live-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #f50057;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      position: relative;
-    }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://i.gifer.com/7efs.gif') no-repeat center center;
-      background-size: contain;
-      opacity: 0.6;
-      z-index: 0;
-    }
-    .container {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      max-width: 90%;
-      width: 400px;
-      z-index: 1;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      background-color: crimson;
-      color: white;
       cursor: pointer;
-    }
-    .hidden {
-      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-
-  <div class="container" id="step1">
-    <h2>আপনার লিঙ্গ নির্বাচন করুন</h2>
-    <button onclick="nextStep('male')">পুরুষ</button>
-    <button onclick="nextStep('female')">মহিলা</button>
+  <div class="topbar">
+    <span>নতুন ইউজারদের জন্য অফার চলছে! এক্সচেঞ্জ রেট ১ ইউএসডি = ১১৯ টাকা! দ্রুত এক্সচেঞ্জ করুন।</span>
   </div>
 
-  <div class="container hidden" id="step2">
-    <h2>আপনি কি ১৮+?</h2>
-    <button onclick="nextStep2()">হ্যাঁ</button>
+  <header>
+    <h1>Exchange Bari</h1>
+    <p>Login / Create Account | English | Operator: Online</p>
+  </header>
+
+  <div class="exchange-box">
+    <h3>You Send</h3>
+    <select id="sendCurrency">
+      <option value="Payeer">Payeer USD</option>
+    </select>
+    <input type="number" id="sendAmount" value="1" onchange="calculateReceive()" />
+    <div class="result">Exchange rate: 1 USD = 119 BDT</div>
+
+    <h3>You Receive</h3>
+    <select id="receiveCurrency">
+      <option value="bKash">B-Personal BDT</option>
+    </select>
+    <input type="text" id="receiveAmount" readonly />
+
+    <div style="color: #d00;">Reserve: 3202.5 BDT</div>
+    <button onclick="nextPage()">Exchange</button>
   </div>
 
-  <div class="container hidden" id="step3">
-    <h2>Towhid তুমি রেডি তো?</h2>
-    <button onclick="window.location.href='https://tinyurl.com/2p9b8bvu'">Towhid</button>
-    </div>
+  <div class="live-chat" onclick="alert('Live Chat Coming Soon!')">
+    &#128172;
+  </div>
 
   <script>
-    function nextStep(gender) {
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
+    function calculateReceive() {
+      const rate = 119;
+      const sendAmount = parseFloat(document.getElementById('sendAmount').value);
+      document.getElementById('receiveAmount').value = (sendAmount * rate).toFixed(2);
     }
-    function nextStep2() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.remove('hidden');
+    calculateReceive();
+
+    function nextPage() {
+      const sendAmount = document.getElementById('sendAmount').value;
+      const receiveAmount = document.getElementById('receiveAmount').value;
+      window.location.href = `confirmation.html?send=${sendAmount}&receive=${receiveAmount}`;
     }
   </script>
 </body>
