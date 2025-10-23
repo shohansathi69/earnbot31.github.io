@@ -1,23 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CPA BAZAR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CPA BAZAR Dashboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
+      background: #e8ffe8;
       padding: 0;
-      background: #e9f7ef;
+      margin: 0;
+    }
+    header {
+      background: #004d00;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+    .dashboard {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      text-align: center;
+    }
+    .balance {
+      font-size: 28px;
+      font-weight: bold;
+      color: #006400;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .history {
+      margin-top: 25px;
+      text-align: left;
+      font-size: 15px;
+      color: #333;
     }
     .topbar {
       background: #004d00;
-      color: white;
-      padding: 8px 15px;
-      font-size: 14px;
-      overflow: hidden;
+      color: #fff;
+      padding: 8px 10px;
       white-space: nowrap;
+      overflow: hidden;
     }
     .topbar span {
       display: inline-block;
@@ -27,114 +71,46 @@
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-    header {
-      background-color: #ffffff;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    header h1 {
-      margin: 0;
-      color: #004d00;
-    }
-    .exchange-box {
-      max-width: 500px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    select, input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    .result {
-      background-color: #dff0d8;
-      padding: 10px;
-      border-radius: 6px;
-      text-align: center;
-      margin-bottom: 15px;
-    }
   </style>
 </head>
 <body>
+
   <div class="topbar">
-    <span>নতুন ইউজারদের জন্য অফার চলছে! কোন রকম সমস্যা হলে লাইভ চ্যাটে যোগাযোগ করুন! দ্রুত এক্সচেঞ্জ করুন।</span>
+    <span>নতুন ইউজারদের জন্য অফার চলছে! Withdraw করতে নিচের বাটনে ক্লিক করুন!</span>
   </div>
 
   <header>
-    <h1>CPA BAZAR</h1>
-    <p> | English | admin🟢: Online</p>
+    <h1>CPA BAZAR Dashboard</h1>
   </header>
 
-  <div class="exchange-box">
-    <h3>আপনি কয়টি নেবেন তা লিখুন👇</h3>
-    <select id="sendCurrency" onchange="calculateReceive()">
-      <option value="User Agent" data-rate="7">User Agent</option>
-      <option value="Email" data-rate="6">Email</option>
-      <option value="CPM User agent" data-rate="7">CPM User Agent</option>
-      <option value="Fake signup user agent" data-rate="7">Fake Signup User Agent</option>
-      <option value="SMS verified Mail" data-rate="35">SMS Verified Mail</option>
-      <option value="CPA account" data-rate="2000">CPA Account</option>
-    </select>
-    <input type="number" id="sendAmount" value="1" onchange="calculateReceive()" />
-    <div class="result">Exchange rate: 1 USDT = 100 BDT</div>
+  <div class="dashboard">
+    <h2>আপনার ব্যালেন্স</h2>
+    <div class="balance" id="balance">1200.00 BDT</div>
 
-    <h3>আপনি কি নিবেন তা সিলেক্ট করুন🙂</h3>
-    <select id="receiveCurrency">
-      <option value="bKash">B-Personal BDT</option>
-      <option value="Nagod">Nagod BDT</option>
-    </select>
-    <input type="text" id="receiveAmount" readonly />
+    <button onclick="withdrawNow()">Withdraw</button>
 
-    <div style="color: #d00;">Reserve: 3202.5 BDT</div>
-    <button onclick="nextPage()">Exchange</button>
+    <div class="history" id="history">
+      <h3>Withdraw History</h3>
+      <ul id="historyList"></ul>
+    </div>
   </div>
 
   <script>
-    function calculateReceive() {
-      const currency = document.getElementById('sendCurrency');
-      const rate = parseFloat(currency.options[currency.selectedIndex].getAttribute('data-rate'));
-      const sendAmount = parseFloat(document.getElementById('sendAmount').value);
-      const receiveAmount = sendAmount * rate;
-      document.getElementById('receiveAmount').value = receiveAmount.toFixed(2);
-      document.querySelector('.result').innerText = `Exchange rate: 1 ${currency.value} = ${rate} BDT`;
+    let balance = 1200.00;
+    const balanceText = document.getElementById('balance');
+    const historyList = document.getElementById('historyList');
+
+    function withdrawNow() {
+      window.location.href = 'withdraw.html?balance=' + balance;
     }
-    calculateReceive();
 
-    function nextPage() {
-      const sendAmount = document.getElementById('sendAmount').value;
-      const receiveAmount = document.getElementById('receiveAmount').value;
-      window.location.href = `confirmation.html?send=${sendAmount}&receive=${receiveAmount}`;
-    }
+    // যদি localStorage-এ withdraw history থাকে
+    const savedHistory = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+    savedHistory.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.amount} BDT - ${item.date}`;
+      historyList.appendChild(li);
+    });
   </script>
-
-  <!-- Start of Tawk.to Script -->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function(){
-      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/67a0cea73a84273260792226/1ij62egig';
-      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-  <!-- End of Tawk.to Script -->
-
 </body>
 </html>
