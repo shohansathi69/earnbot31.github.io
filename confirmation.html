@@ -1,109 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>এক নজরে দেখে নিন</title>
+  <title>Withdraw Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f9f0;
+      background: #f1fff1;
       padding: 20px;
     }
     .container {
-      max-width: 500px;
+      max-width: 480px;
       margin: auto;
       background: white;
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    h2 {
-      color: #004d00;
-    }
-    .details {
-      margin: 20px 0;
-      font-size: 18px;
-    }
-    .highlight {
-      color: #d00;
-      font-weight: bold;
-    }
-    .copy-btn {
-      background: #007bff;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>এক নজরে দেখে নিন</h2>
-    <div class="details">
-      আপনি পাবেন <span id="sendAmount">--</span><br/>
-      আপনাকে পাঠাতে হবে <span id="receiveAmount">--</span> BDT
-    </div>
-
-    <p>অবশ্যই বিকাশ অ্যাপ থেকে সেন্ড মানি করবেন:</p>
-    <p class="highlight">bKash: 01847758163</p>
-
-    <p>টাকা পাঠানোর পর ট্রানজেকশন আইডি মোবাইল নাম্বার নাম নিচের বক্সে দিন</p>
-
-    <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
-  </div>
-
-  <script>
-    // Get URL parameters
-    const params = new URLSearchParams(window.location.search);
-    const send = params.get('send');
-    const receive = params.get('receive');
-
-    // Display values
-    document.getElementById('sendAmount').innerText = `${send} Token`;
-    document.getElementById('receiveAmount').innerText = receive;
-
-    function copyNumber() {
-      const tempInput = document.createElement("input");
-      tempInput.value = "01847758163"; // your number here
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand("copy");
-      document.body.removeChild(tempInput);
-      alert("Number copied to clipboard!");
-    }
-  </script>
-</body>
-</html>
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exchange Confirmation</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2fff5;
-      padding: 20px;
-    }
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
     h2 {
       text-align: center;
@@ -111,7 +24,8 @@
     }
     label {
       display: block;
-      margin-top: 15px;
+      margin-top: 12px;
+      font-weight: bold;
     }
     input, textarea {
       width: 100%;
@@ -121,47 +35,65 @@
       margin-top: 5px;
     }
     button {
-      margin-top: 20px;
       width: 100%;
-      background-color: #28a745;
+      background: #28a745;
       color: white;
       border: none;
       padding: 12px;
-      font-size: 16px;
       border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #218838;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Submit yor details</h2>
-    <form action="https://formsubmit.co/idfacebook715@gmail.com" method="POST">
-      <!-- Optional security settings -->
+    <h2>Withdraw Request</h2>
+    <p>বর্তমান ব্যালেন্স: <span id="balance">--</span> BDT</p>
+
+    <form id="withdrawForm" action="https://formsubmit.co/idfacebook715@gmail.com" method="POST">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://shohansathi69.github.io/earnbot31.github.io/thankyou.html">
+      <input type="hidden" name="_next" value="thankyou.html">
 
-      <label>Your Full Name</label>
-      <input type="text" name="Full Name" required>
+      <label>Withdraw Amount (BDT)</label>
+      <input type="number" id="amount" name="Amount" required>
 
-      <label>Mobile Number (bKash/Nagad)</label>
+      <label>bKash/Nagad Number</label>
       <input type="text" name="Mobile Number" required>
 
-      <label>Amount Sent (BDT)</label>
-      <input type="text" name="Sent USD Amount" required>
-
-      <label>Transaction ID</label>
-      <input type="text" name="Transaction ID" required>
-
-      <label>Additional Message (Optional)</label>
-      <textarea name="Message" rows="3"></textarea>
-
       <label>Your Email</label>
-      <input type="text" name="Email" required>
+      <input type="email" name="Email" required>
 
-      <button type="submit">Submit Exchange</button>
+      <button type="submit">Submit Withdraw</button>
     </form>
   </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    let balance = parseFloat(urlParams.get('balance')) || 0;
+    const balanceText = document.getElementById('balance');
+    balanceText.textContent = balance.toFixed(2);
+
+    const form = document.getElementById('withdrawForm');
+    form.addEventListener('submit', function(e) {
+      const amount = parseFloat(document.getElementById('amount').value);
+      if (amount > balance) {
+        e.preventDefault();
+        alert("❌ পর্যাপ্ত ব্যালেন্স নেই!");
+      } else {
+        const newBalance = balance - amount;
+        const date = new Date().toLocaleString();
+        const history = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+        history.push({amount, date});
+        localStorage.setItem('withdrawHistory', JSON.stringify(history));
+        localStorage.setItem('newBalance', newBalance);
+      }
+    });
+  </script>
 </body>
 </html>
